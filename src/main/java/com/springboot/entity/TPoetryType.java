@@ -3,7 +3,7 @@ package com.springboot.entity;
 import javax.persistence.*;
 @Entity
 //诗词类别表
-@Table(name = "T_Type", schema = "test")
+@Table(name = "t_poetrytype", schema = "test")
 public class TPoetryType {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

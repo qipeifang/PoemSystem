@@ -10,5 +10,5 @@ import java.util.List;
 
 public interface PRecommendDao extends JpaRepository<PRecommend,Long> {
     @Query(value = " call recommend(:arg)", nativeQuery = true)
-    List<PRecommend> recommend(@Param("arg")Integer arg);
+    List<PRecommend> recommend(@Param("arg") Integer arg);
 }

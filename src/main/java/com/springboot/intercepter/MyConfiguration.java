@@ -22,10 +22,14 @@ public class MyConfiguration implements WebMvcConfigurer {
         loginRegistry.excludePathPatterns("/register");
         loginRegistry.excludePathPatterns("/listallpoetrys");
         loginRegistry.excludePathPatterns("/displaypoetrybyid");
-
         loginRegistry.excludePathPatterns("/getrecommend");
         loginRegistry.excludePathPatterns("/getpoetrytype");
-        loginRegistry.excludePathPatterns("/");
+        loginRegistry.excludePathPatterns("/listallpoetrytype");
+        loginRegistry.excludePathPatterns("/listallpoetrytypebyid");
+
+        loginRegistry.excludePathPatterns("/listalldynasty");
+        loginRegistry.excludePathPatterns("/listalldynastybyid");
+        loginRegistry.excludePathPatterns("/listpoetrybykw");
         loginRegistry.excludePathPatterns("/");
         // 排除资源请求
         loginRegistry.excludePathPatterns("/css/login/*.css");

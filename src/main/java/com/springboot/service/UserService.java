@@ -11,7 +11,7 @@ public interface UserService extends java.io.Serializable{
     void addUser(TUser user);
     void modifyUser(TUser user);
     List<TUser> findEmail(String email);
-    List<TUser> findByEmailNotId(String email,long id);
+    List<TUser> findByEmailNotId(String email, long id);
     TUser checkUser(UserLogin user);
     //管理员对用户的操作
     public void saveUser(TUser u)throws Exception;
@@ -28,7 +28,7 @@ public interface UserService extends java.io.Serializable{
     //分页查询
     Page<TUser> findBookNoCriteria(Integer page, Integer size);
     //关键字分页查询
-    Page<TUser> findBookCriteria(Integer page, Integer size,String kw);
+    Page<TUser> findBookCriteria(Integer page, Integer size, String kw);
 
     void save(TUser user);
 

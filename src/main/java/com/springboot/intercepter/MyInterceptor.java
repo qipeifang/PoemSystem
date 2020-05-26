@@ -24,6 +24,7 @@ public class MyInterceptor implements HandlerInterceptor {
         if (null == loginName) {
             // 未登录，重定向到登录页
             System.out.println("未登录");
+           // response.sendRedirect();
             return false;
         }
         System.out.println("当前用户已登录，登录的用户为： " + loginName.toString());

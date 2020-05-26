@@ -2,10 +2,8 @@ package com.springboot.controller;
 
 import com.springboot.bean.Result;
 import com.springboot.entity.TDynasty;
-import com.springboot.entity.TPoetryType;
 import com.springboot.entity.VPoetry;
 import com.springboot.service.DynastyService;
-import com.springboot.service.PoetryTypeService;
 import com.springboot.service.VPoetryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
