@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8"></meta>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <link rel="stylesheet" type="text/css" href="reset.css">
+  <link rel="stylesheet" th:href="@{css/index.css}">
+  <link rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
+  <link rel="stylesheet" th:href="@{css/bootstrap-theme.min.css}"/>
+  <script type="text/javascript" th:src="@{js/jquery-1.11.0.min.js}"></script>
+  <script type="text/javascript" th:src="@{js/bootstrap.min.js}"></script>
+  <title>注册界面</title>
+</head>
+<body style="background-color: #f1f1f1;">
+<div class="formWrapper register">
+  <p class="header">
+    用户注册
+  </p>
+  <form action="register" method="post"
+        onsubmit="return checkkey()">
+    <table>
+      <tr class="form-item">
+        <td class="form-item-title">用户名：</td>
+        <td><input type="text" class="form-group" name="username"
+                   placeholder="用户名" id="username" /></td>
+      </tr>
+      <tr class="form-item">
+        <td class="form-item-title">用户邮箱：</td>
+        <td><input id="email" type="email" class="form-group" name="email"
+                   placeholder="请输入电子邮箱" /></td>
+      </tr>
+      <tr class="form-item">
+        <td class="form-item-title">密码：</td>
+        <td><input id="pw1" type="password" class="form-group"
+                   name="password" placeholder="密码" /></td>
+      </tr>
+      <tr class="form-item">
+        <td class="form-item-title">密码：</td>
+        <td><input id="pw2" type="password" class="form-group"
+                   name="password2" placeholder="请再输入一遍密码" /></td>
+      </tr>
+      <tr class="form-item">
+        <td class="form-item-title">验证码：</td>
+        <td><input type="text" id="textfield5" name="code"
+                   placeholder="请输入验证码" style="text-indent: 2rem;" /></td>
+        <td>
+          <img id="code"
+               src="/validateCodeController/validateCode"
+               onclick="refreshCode()" />
+        </td>
+        <td>[[${message}]]</td>
+      </tr>
+    </table>
+    <div class="form-item-register2">
+      <input class="login-button" type="submit" value="注册" name="submit" />
+    </div>
+
+  </form>
+  <form action="login" method="get">
+    <div class="form-item-cancel">
+      <input class="login-button" type="submit" value="取消" name="submit"  />
+    </div>
+  </form>
+
+</div>
+</body>
+<script th:inline="javascript">
+  var message=[[${message}]];
+  if(message!=null){
+    alert(message);
+  }
+
+  //刷新验证码
+  function refreshCode(){
+    document.getElementById("code").src = "/validateCodeController/validateCode?"+ Math.random();
+  }
+  function checkkey() {
+    var pwd1 = document.getElementById("pw1").value;
+    var pwd2 = document.getElementById("pw2").value;
+    var email = document.getElementById("email").value;
+    var username = document.getElementById("username").value;
+    if(pwd1===""||pwd2 ===""||email===""||username===""){
+      alert("请填写完整信息！");
+      return false;
+    }
+    if (pwd1 != pwd2) {
+      alert("注册失败，两次输入的密码不一致");
+      return false;
+    } else {
+      return true;
+    }
+  }
+</script>
+</html>

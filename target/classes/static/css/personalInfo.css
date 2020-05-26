@@ -1,0 +1,49 @@
+.title {
+  text-align: center;
+  padding: 2vh 0;
+  border-bottom: 1px solid rgb(201, 197, 197);
+  font-size: 18px;
+}
+
+.formWrapper {
+  width: 30vw;
+  height: 50%;
+  margin: auto;
+  padding: 1vh 4vw;
+}
+
+.formWrapper table {
+  border-collapse: collapse;
+}
+
+.formWrapper .form-item {
+  display: block;
+  width: 40vw;
+  height: 12vh;
+  line-height: 12vh;
+  border-bottom: 1px solid #f0f0f0;
+}
+.formWrapper .form-item .form-item-title {
+  width: 12vw;
+  color: #969696;
+}
+.formWrapper .form-item input {
+  width: 15vw;
+  height: 3vh;
+  padding: 1vh 1vw;
+  font-size: 15px;
+  border: 1px solid #c8c8c8;
+  border-radius: 4px;
+  background-color: hsla(0,0%,71%,.1);
+}
+/* 保存 */
+.formWrapper.submitbt{
+  width: 7vw;
+  margin: 4vh 0 0;
+  height: 5vh;
+  border-radius: 15px;
+  border: none;
+  background: rgb(49, 207, 43);
+  color: #f0f0f0;
+  font-size: 15px;
+}

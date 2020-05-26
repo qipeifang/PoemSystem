@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>
+    <script th:src="@{/js/jquery-1.11.0.min.js}" type="text/javascript"></script>
+    <script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
+</head>
+<body>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>username</th>
+        <th>password</th>
+        <th>email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="obj : ${datas}">
+        <td th:text="${obj.id}">${obj.id}</td>
+        <td th:text="${obj.username}">${obj.username}</td>
+        <td th:text="${obj.password}">${obj.password}</td>
+        <td th:text="${obj.email}">${obj.email}</td>
+    </tr>
+    </tbody>
+</table>
+<div th:include="page :: pager" th:remove="tag"></div>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="stylesheet" type="text/css" href="reset.css">
+    <link rel="stylesheet" th:href="@{css/index.css}">
+    <link rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{css/bootstrap-theme.min.css}"/>
+    <script type="text/javascript" th:src="@{js/jquery-1.11.0.min.js}"></script>
+    <script type="text/javascript" th:src="@{js/bootstrap.min.js}"></script>
+    <title>个人信息管理</title>
+</head>
+<body  style="background-color: #f1f1f1;">
+<div>
+    <div class="title">基础设置</div>
+    <form action="SavePersonalInfo" method="post" th:object="${user}" class="formWrapper" >
+        <div class="row" th:if="${#fields}">
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+                <span th:each="err:${#fields.errors('*')}" th:text="${err}+'&nbsp;'"></span>
+            </p>
+        </div>
+        <table>
+            <tr>
+                <td><input id="id"  class="form-group" name="id"
+                           th:value="${user.id}" type="hidden" readonly ></td>
+            </tr>
+            <tr>
+                <td><input id="isAdmin"  class="form-group"
+                           th:value="${user.isManager}" type="hidden"  readonly ></td>
+            </tr>
+            <tr>
+                <td><input id="isVIP"  class="form-group"
+                           th:value="${user.isVIP}" type="hidden"  readonly ></td>
+            </tr>
+            <tr class="form-item">
+                <td  class="form-item-title">邮箱</td>
+                <td><input id="useremail" name="email" class="form-group"
+                           th:value="${user.email}" readonly></td>
+            </tr>
+            <tr class="form-item">
+                <td  class="form-item-title">用户实名</td>
+                <td><input id="username" name="username" class="form-group"
+                           th:value="${user.username}" ></td>
+            </tr>
+            <tr class="form-item">
+                <td  class="form-item-title">密码</td>
+                <td><input id="pw1" type="password" class="form-group"
+                           name="password" th:value="${user.password}" placeholder="若更改密码请输入两遍" /></td>
+            </tr>
+            <tr class="form-item">
+                <td  class="form-item-title">密码</td>
+                <td><input id="pw2" type="password" class="form-group"
+                           name="password2" th:value="${user.password}" placeholder="若更改密码请输入两遍" /></td>
+            </tr>
+            <tr class="form-item">
+                <td  class="form-item-title">等级</td>
+                <td><input id="grade" name="grade" class="form-group"
+                           th:value="${user.grade}" readonly></td>
+            </tr>
+            <tr class="form-item">
+                <td  class="form-item-title">性别</td>
+
+                    <div th:each="a:${sexes}">
+                        <td>
+                        <input type="radio"  th:field="*{grander}" th:value="${a}" >
+                        <span th:text="${a}" style="display:inline-block"></span>
+                        </td>
+                    </div>
+
+            </tr>
+        </table>
+            <input class="submitbt" type="submit" value="保存" name="submit" />
+
+    </form>
+</div>
+</body>
+<script th:inline="javascript">
+    var message=[[${message}]];
+    if(message!=null){
+        alert(message);
+    }
+    function select(e) {
+        window.location.href = e.value;
+    }
+    var gender=[[${user.grander}]];
+    //根据值让option选中
+    if(gender==="0"){
+        $("#gender option[value='"+gender+"']").attr("selected","selected");
+    }else if(gender==="1"){
+        $("#gender option[value='"+gender+"']").attr("selected","selected");
+    }
+    function check() {
+        var pwd1 = document.getElementById("pw1").value;
+        var pwd2 = document.getElementById("pw2").value;
+        var username=document.getElementById("username").value;
+        if (pwd1 != pwd2) {
+            alert("保存失败,两次输入的密码不一致");
+            return false;
+        }
+        else if(username===""||pwd1===""){
+            alert("请填写完整信息");
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+</script>
+</html>

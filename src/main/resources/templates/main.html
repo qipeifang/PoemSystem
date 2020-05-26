@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"></meta>
+<link rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{css/bootstrap-theme.min.css}"/>
+<script type="text/javascript" th:src="@{js/jquery-1.11.0.min.js}"></script>
+<script type="text/javascript" th:src="@{js/bootstrap.min.js}"></script>
+<title>网站首页</title>
+</head>
+<body>
+<form action="goPersonalInfo">
+    <button>个人信息管理</button>
+</form>
+<form action="/listusers">
+    <button>用户管理</button>
+</form>
+<form action="/listcollections">
+    <button>用户收藏管理</button>
+</form>
+</body>
+</html>

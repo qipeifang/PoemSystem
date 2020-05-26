@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>管理评论</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>
+    <script th:src="@{/js/jquery-1.11.0.min.js}" type="text/javascript"></script>
+    <script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
+    <script th:src="@{/js/delcomment.js}" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="reset.css">
+    <link rel="stylesheet" th:href="@{css/index.css}">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h5>评论管理</h5>
+        </div>
+        <div class="row">
+            <form class="form-row" th:action="@{/listcomments}" id="form2" method="post">
+                <div class="form-group">
+                    <label>关键字</label>
+                    <input type="text" placeholder="请输入关键字进行搜索" name="kw" th:value="${kw}">
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="搜索">
+                   <input type="hidden" name="ids" value="" id="deleteids">
+                    <button type="button" class="btn btn-danger delbtns">删除</button>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>评论者</th>
+                        <th>评论内容</th>
+                        <th>评论时间</th>
+                        <th>诗词ID</th>
+                        <th>--</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="c:${pages.content}">
+                        <td>
+                            <input type="checkbox" th:value="${c.id}" class="cid">
+                            <span th:text="${cStat.count}"></span>
+                        </td>
+                        <td th:text="${c.email}"></td>
+                        <td th:text="${c.comments}"></td>
+                        <td th:text="${c.time}"></td>
+                        <td th:text="${c.poetryid}"></td>
+                        <td>
+                            <a th:href="@{|/deletecomment/${c.id}|}" class="delbtn">删除</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row" th:fragment="pager">
+            <nav><!--分页碎片需要的数据：1、查询结果数据用pages作为关键字，且是分页查询
+                    2、当前网址必须是查询页面-->
+                <ul class="pagination">
+                    <li class="page-item" th:each="p:${#numbers.sequence(1,pages.totalPages)}">
+                        <a href="javascript:void (0);" th:page="${p-1}" class="page-link pagelink" th:text="${p}"></a>
+                    </li>
+                </ul>
+            </nav>
+            <script type="text/javascript">
+                $(".pagelink").click(function () {
+                    var f=$("#form2");
+                    var p=$("<input type='hidden' name='page'>");
+                    $(p).val($(this).attr("page"));
+                    //var s=$("<input type='hidden' name='size' value='1'>");
+                    //$(s).appendTo(f);
+                    $(p).appendTo(f);
+                    $(f).submit();
+                    return false;
+                })
+            </script>
+        </div>
+    </div>
+</body>
+</html>

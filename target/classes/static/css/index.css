@@ -1,0 +1,82 @@
+body {
+  background-color: #f1f1f1;
+}
+.formWrapper {
+  background: #fff;
+  width: 40vw;
+  margin: 15vh auto 0;
+  padding: 10px 30px 15px;
+  border-radius: 4px;
+  box-shadow: 0 0 8px rgba(0,0,0,.1);
+  text-align: center;
+  position: relative;
+}
+.formWrapper.login {
+  height: 50vh;
+}
+.formWrapper.register {
+  height: 75vh;
+}
+
+.formWrapper .header {
+  font-size: 22px;
+}
+
+.formWrapper .form-item {
+  display: block;
+  width: 40vw;
+  height: 8vh;
+  line-height: 8vh;
+  border-bottom: 1px solid #f0f0f0;
+}
+.formWrapper .form-item .form-item-title {
+  width: 12vw;
+  color: #969696;
+}
+.formWrapper .form-item input {
+  width: 15vw;
+  height: 3vh;
+  padding: 1vh 1vw;
+  font-size: 15px;
+  border: 1px solid #c8c8c8;
+  border-radius: 4px;
+  background-color: hsla(0,0%,71%,.1);
+}
+
+/* 登录 */
+.formWrapper .form-item-login {
+  position: absolute;
+  bottom: 12vh;
+  width: 40vw;
+}
+/* 登录页面和注册页面的 注册按钮 */
+.form-item-register1 {
+  position: absolute;
+  bottom: 5vh;
+  width: 40vw;
+}
+.form-item-register2 {
+  position: absolute;
+  bottom: 12vh;
+  width: 40vw;
+}
+/* 取消按钮 */
+.form-item-cancel {
+  position: absolute;
+  bottom: 5vh;
+  width: 40vw;
+}
+
+.login-button {
+  background: rgb(71, 111, 223);
+  width: 18vw;
+  height: 6vh;
+  line-height: 6vh;
+  border-radius: 50px;
+  border: none;
+  margin: 10px 0;
+  color: #f1f1f1;
+  font-size: 16px;
+  cursor: pointer;
+}
+

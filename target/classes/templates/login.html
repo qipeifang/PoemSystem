@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="stylesheet" type="text/css" href="reset.css">
+    <link rel="stylesheet" th:href="@{css/index.css}">
+    <link rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{css/bootstrap-theme.min.css}"/>
+    <script type="text/javascript" th:src="@{js/jquery-1.11.0.min.js}"></script>
+    <script type="text/javascript" th:src="@{js/bootstrap.min.js}"></script>
+    <title>登录界面</title>
+</head>
+<body style="background-color: #f1f1f1;">
+<div class="formWrapper login">
+    <p class="header">
+        登录界面
+    </p>
+    <form th:action="@{/login}" th:object="${userLogin}" method="post">
+        <div class="row" th:if="${#fields}">
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+                <span th:each="err:${#fields.errors('*')}" th:text="${err}+'&nbsp;'"></span>
+            </p>
+        </div>
+        <table>
+            <tr class="form-item">
+                <td class="form-item-title">邮箱</td>
+                <td><input type="email"  th:field="*{email}" required placeholder="请输入邮箱账号"></td>
+            </tr>
+            <tr class="form-item">
+                <td class="form-item-title">密码</td>
+                <td><input type="password"  th:field="*{password}" required placeholder="请输入密码"></td>
+            </tr>
+            <div class="form-item-login">
+                <input class="login-button" type="submit" value="登录" name="submit" />
+            </div>
+        </table>
+    </form>
+    <form class="test" action="goregister" id="goregisterform" >
+        <div class="form-item-register1">
+            <input class="login-button" type="submit" value="注册" name="submit" />
+        </div>
+    </form>
+</div>
+</body>
+<script th:inline="javascript">
+    var message=[[${message}]];
+    if(message!=null){
+        alert(message);
+    }
+</script>
+
+</html>
