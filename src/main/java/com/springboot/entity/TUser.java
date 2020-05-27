@@ -1,8 +1,6 @@
 package com.springboot.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -21,18 +19,18 @@ public class TUser {
     private int isManager;//是否为管理员 0:不是管理员 1:是管理员
     private int isVIP;//是否为会员 0:是会员   1:不是会员
     private int grade;//用户等级
-    public enum Sex{
-        男,女;//枚举中常量结束位置要有分号
-        public static List<String> toList(){
-            Sex[] sex=Sex.values();
-            List<String> datas=new ArrayList<>();//定义一个列表容纳所有枚举的数据
-            for (Sex s:sex){
-                datas.add(s.name());
-            }
-            return datas;
-        }
-    };
-    private Sex grander;//实际输入数据库的是索引值，即男为0，女为1
+//    public enum Sex{
+//        男,女;//枚举中常量结束位置要有分号
+//        public static List<String> toList(){
+//            Sex[] sex=Sex.values();
+//            List<String> datas=new ArrayList<>();//定义一个列表容纳所有枚举的数据
+//            for (Sex s:sex){
+//                datas.add(s.name());
+//            }
+//            return datas;
+//        }
+//    };
+//    private Sex grander;//实际输入数据库的是索引值，即男为0，女为1
     public TUser() {
     }
 
@@ -100,13 +98,13 @@ public class TUser {
         this.email = email;
     }
 
-    public Sex getGrander() {
-        return grander;
-    }
-
-    public void setGrander(Sex grander) {
-        this.grander = grander;
-    }
+//    public Sex getGrander() {
+//        return grander;
+//    }
+//
+//    public void setGrander(Sex grander) {
+//        this.grander = grander;
+//    }
 
     public String getGender() {
         return gender;
@@ -128,11 +126,11 @@ public class TUser {
                 Objects.equals(username, tUser.username) &&
                 Objects.equals(password, tUser.password) &&
                 Objects.equals(email, tUser.email) &&
-                grander == tUser.grander;
+                gender == tUser.gender;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, password, email, grander, isManager, isVIP, grade);
+        return Objects.hash(id, username, password, email, gender, isManager, isVIP, grade);
     }
 }
