@@ -20,4 +20,13 @@ public class PoetryTypeImp implements PoetryTypeService {
         return poetryTypeDao.findAll();
     }
 
+    @Override
+    public List<TPoetryType> adminshowAll(String kw) {
+        return poetryTypeDao.findByKeyword(kw);
+    }
+
+    @Override
+    public void deleteById(long id) {
+        poetryTypeDao.deleteById(id);
+    }
 }

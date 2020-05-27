@@ -7,6 +7,7 @@ import com.springboot.service.DynastyService;
 import com.springboot.service.VPoetryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,6 +41,50 @@ public class DynastyController {
         result.setData(list);
         return result;
     }
+
+    //管理员功能
+    @GetMapping("/admin/listdynasty")
+    @ResponseBody
+    public Result adminlistallcomment(String kw, Model model){
+        if (kw!=null) kw="%"+kw+"%";
+        if (kw==null) kw="%%";
+        Result result = new Result();
+        //通过关键字查询
+        List<TDynasty> listcomms= dynastyService.adminshowAll(kw);
+        //放到data中
+        result.setData(listcomms);
+        return result;
+    }
+    @PostMapping("/admin/listdynasty")
+    @ResponseBody
+    public Result adminlistallcommentbykw(@RequestBody String kw){
+        if (kw!=null) kw="%"+kw+"%";
+        if (kw==null) kw="%%";
+        System.out.println(kw);
+        Result result = new Result();
+        //通过关键字查询
+        List<TDynasty> listcomms= dynastyService.adminshowAll(kw);
+        //放到data中
+        result.setData(listcomms);
+        return result;
+    }
+
+    @PostMapping("/admin/deletedynasty")
+    @ResponseBody
+    public Result admindelete(@RequestBody String id){
+        Result result = new Result();
+        Integer id1=Integer.valueOf(id);
+        dynastyService.deleteById(id1);
+        result.setDescription("删除成功");//添加返回信息描述
+        //添加返回数据
+        String kw="%%";
+        //通过关键字查询
+        List<TDynasty> listcomms= dynastyService.adminshowAll(kw);
+        //放到data中
+        result.setData(listcomms);
+        return result;
+    }
+
 }
 
 

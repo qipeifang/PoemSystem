@@ -11,12 +11,11 @@ public class TPoetry {
     private long id;//自增
     private String name;//古诗名
     private int dynastyid;
-    private String content;
-    private String annotation;
-    private String note;
+    private String content;//诗词内容
+    private String annotation;//注释
     private int typeid;
     private int authoruid;
-    private String translation;
+    private String translation;//翻译
 
     public TPoetry() {
     }
@@ -59,14 +58,6 @@ public class TPoetry {
 
     public void setAnnotation(String annotation) {
         this.annotation = annotation;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
     }
 
     public int getTypeid() {

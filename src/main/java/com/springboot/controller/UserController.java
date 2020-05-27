@@ -119,7 +119,6 @@ public class UserController {
 	@PostMapping("/SavePersonalInfo")
 	@ResponseBody
 	public Result SavePersonalInfo(TUser user,HttpSession session) throws NoSuchAlgorithmException {
-		System.out.println("###################");
 		Result result = new Result();
 		if(userService.findByEmailNotId(user.getEmail(),user.getId()).size()!=0){
 			result.setDescription("该邮箱已绑定账号，修改失败！");

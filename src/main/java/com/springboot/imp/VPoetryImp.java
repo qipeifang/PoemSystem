@@ -35,6 +35,16 @@ public class VPoetryImp implements VPoetryService {
     }
 
     @Override
+    public void deleteById(long id) {
+        vPoetryDao.deleteById(id);
+    }
+
+    @Override
+    public List<VPoetry> adminshowAll(String kw) {
+        return vPoetryDao.findByKeyword(kw);
+    }
+
+    @Override
     public List<VPoetry> showAll() {
         return vPoetryDao.findAll();
     }

@@ -32,6 +32,7 @@ public interface CommentDao extends JpaRepository<TComment, Long> {
 
     //诗词下显示本诗词评论
     //通过poetryid查询评论信息
-    @Query("select u from TComment u where poetryname like ?1")
+    @Query("select u from TComment u where poetryname=?1")
     public List<TComment> findByPoetryname(String poetryname);
+
 }

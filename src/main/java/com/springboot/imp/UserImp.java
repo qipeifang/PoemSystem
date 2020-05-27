@@ -83,10 +83,10 @@ public  class UserImp implements UserService {
         return userDao.findAll();
     }
 
-//    @Override
-//    public Page<TUser> findAll(String kw, Pageable pageable) {
-//        return userDao.findByKeyword(kw, pageable);
-//    }
+    @Override
+    public Page<TUser> findAll(String kw, Pageable pageable) {
+        return userDao.findByKeyword(kw, pageable);
+    }
 
 
 
@@ -120,20 +120,20 @@ public  class UserImp implements UserService {
         return userDao.findByEmail(email).get();
     }
 
-//    //分页查询
-//    @Override
-//    public Page<TUser> findBookNoCriteria(Integer page, Integer size) {
-//        Pageable pageable = PageRequest.of(page, size, Sort.Direction.ASC, "id");
-//        return userDao.findAll(pageable);
-//    }
+    //分页查询
+    @Override
+    public Page<TUser> findBookNoCriteria(Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.Direction.ASC, "id");
+        return userDao.findAll(pageable);
+    }
     //关键字分页查询
-//    @Override
-//    public Page<TUser> findBookCriteria(Integer page, Integer size, String kw) {
-//        Pageable pageable =  PageRequest.of(page, size, Sort.Direction.ASC, "id");
-////        Page<TUser> userPage = userDao.findAll((Specification<TUser>) userDao.findByKeyword(kw, pageable),pageable);
-//        Page<TUser> userPage = userDao.findByKeyword(kw, pageable);
-//        return userPage;
-//    }
+    @Override
+    public Page<TUser> findBookCriteria(Integer page, Integer size, String kw) {
+        Pageable pageable =  PageRequest.of(page, size, Sort.Direction.ASC, "id");
+//        Page<TUser> userPage = userDao.findAll((Specification<TUser>) userDao.findByKeyword(kw, pageable),pageable);
+        Page<TUser> userPage = userDao.findByKeyword(kw, pageable);
+        return userPage;
+    }
 
     @Override
     public void save(TUser user) {
@@ -146,7 +146,7 @@ public  class UserImp implements UserService {
         if (entity!=null){//用户存在，编辑用户
             entity.setUsername(user.getUsername());
             entity.setPassword(user.getPassword());
-            entity.setGender(user.getGender());
+            entity.setGrander(user.getGrander());
             entity.setIsVIP(user.getIsVIP());
             entity.setGrade(user.getGrade());
         }
@@ -161,11 +161,6 @@ public  class UserImp implements UserService {
         for (int i=0;i<userList.size();i++) {
             deleteById(userList.get(i));
         }
-    }
-
-    @Override
-    public List<TUser> adminshowAll(String kw) {
-        return userDao.findByKeyword(kw);
     }
 
 

@@ -2,8 +2,6 @@ package com.springboot.controller;
 
 import com.springboot.bean.Result;
 import com.springboot.entity.TComment;
-import com.springboot.entity.TNotice;
-import com.springboot.entity.TPoetry;
 import com.springboot.entity.TUser;
 import com.springboot.service.CommentService;
 import com.springboot.service.PoetryService;
@@ -13,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,6 +23,7 @@ import java.util.List;
 public class CommentController {
     @Autowired
     private CommentService commentService;
+    @Autowired
     private PoetryService poetryService;
 
     @GetMapping("/listcomments")
@@ -143,10 +141,9 @@ public class CommentController {
 
 
     //诗词下显示评论
-//    @PostMapping("/poetry/listcomments")
-    @GetMapping("/poetry/listcomments")
+    @PostMapping("/poetry/listcomments")
     @ResponseBody
-//    public Result poetry_listcomments(@RequestBody Long poetryid){
+
     public Result poetry_listcomments(String poetryname){
         Result result=new Result();
         List<TComment> listcomms=commentService.poetry_listcomments(poetryname);

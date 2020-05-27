@@ -11,8 +11,8 @@ public class TDynasty {
     @Column(nullable = false, updatable = false)
     private int id;//自增
     private  String name;
-    private  String  start ;
-    private  String  end;
+    private  String  starttime ;
+    private  String  endtime;
     private  String intro;
 
     public int getId() {
@@ -31,20 +31,20 @@ public class TDynasty {
         this.name = name;
     }
 
-    public String getStart() {
-        return start;
+    public String getStarttime() {
+        return starttime;
     }
 
-    public void setStart(String start) {
-        this.start = start;
+    public void setStarttime(String starttime) {
+        this.starttime = starttime;
     }
 
-    public String getEnd() {
-        return end;
+    public String getEndtime() {
+        return endtime;
     }
 
-    public void setEnd(String end) {
-        this.end = end;
+    public void setEndtime(String endtime) {
+        this.endtime = endtime;
     }
 
     public String getIntro() {

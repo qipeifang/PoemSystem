@@ -15,4 +15,8 @@ public interface VPoetryService {
     List<VPoetry> showAllByTypeId(Integer id1);
 
     List<VPoetry> showAllByDynastyId(Integer id1);
+
+    void deleteById(long id);
+
+    List<VPoetry> adminshowAll(String kw);
 }

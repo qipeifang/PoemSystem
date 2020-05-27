@@ -16,7 +16,7 @@ public interface UserService extends java.io.Serializable{
     //管理员对用户的操作
     public void saveUser(TUser u)throws Exception;
     public List<TUser> findAll();
-//    public Page<TUser> findAll(String kw, Pageable pageable);
+    public Page<TUser> findAll(String kw, Pageable pageable);
     public TUser findById(long id);
     public void delete(TUser u);//删除一条信息
     public boolean deleteById(long id);
@@ -25,10 +25,10 @@ public interface UserService extends java.io.Serializable{
     TUser findByEmail(String email);
 
 
-//    //分页查询
-//    Page<TUser> findBookNoCriteria(Integer page, Integer size);
-//    //关键字分页查询
-//    Page<TUser> findBookCriteria(Integer page, Integer size, String kw);
+    //分页查询
+    Page<TUser> findBookNoCriteria(Integer page, Integer size);
+    //关键字分页查询
+    Page<TUser> findBookCriteria(Integer page, Integer size, String kw);
 
     void save(TUser user);
 
@@ -41,9 +41,6 @@ public interface UserService extends java.io.Serializable{
 //     Result deleteUserByCheck(String ids);
     public void updataUser(TUser u);
     public void deleteusers(List<Long> userList);
-
-
-    List<TUser> adminshowAll(String kw);
 }
 
 

@@ -20,4 +20,14 @@ public class DynastyImp implements DynastyService {
     public List<TDynasty> getAllDynasty() {
         return dynastyDao.findAll();
     }
+
+    @Override
+    public void deleteById(long id) {
+        dynastyDao.deleteById(id);
+    }
+
+    @Override
+    public List<TDynasty> adminshowAll(String kw) {
+        return dynastyDao.findByKeyword(kw);
+    }
 }
