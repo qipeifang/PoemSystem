@@ -24,4 +24,14 @@ public class PoetryImp implements PoetryService {
     public TPoetry findById(long id) {
         return poetryDao.findById(id).get();
     }
+
+    @Override
+    public void deleteById(long id) {
+        poetryDao.deleteById(id);
+    }
+
+    @Override
+    public void AddPoetry(TPoetry poetry) {
+        poetryDao.save(poetry);
+    }
 }

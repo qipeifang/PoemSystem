@@ -33,6 +33,16 @@ public class PoetImp implements PoetService {
         return poetDao.findById(id);
     }
 
+    @Override
+    public void AddPoet(TPoet poet) {
+        poetDao.save(poet);
+    }
+
+    @Override
+    public void modifyPoet(TPoet poet) {
+        poetDao.save(poet);
+    }
+
 
 }
 

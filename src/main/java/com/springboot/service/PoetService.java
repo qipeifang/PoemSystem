@@ -12,4 +12,8 @@ public interface PoetService extends java.io.Serializable {
     List<TPoet> showAll(String kw);
 
     List<TPoet> displayPoet(long id);
+
+    void AddPoet(TPoet poet);
+
+    public void modifyPoet(TPoet poet);
 }

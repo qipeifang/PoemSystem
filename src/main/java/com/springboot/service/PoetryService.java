@@ -9,4 +9,7 @@ public interface PoetryService extends java.io.Serializable {
 
 
     public TPoetry findById(long id);
+    void deleteById(long id);
+
+    void AddPoetry(TPoetry poetry);
 }

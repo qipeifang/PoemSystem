@@ -1,19 +1,17 @@
 package com.springboot.controller;
 
 import com.springboot.bean.Result;
-import com.springboot.entity.TNotice;
 import com.springboot.entity.TPoet;
 import com.springboot.entity.TUser;
+import com.springboot.security.SHA1Test;
 import com.springboot.service.PoetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 //诗人管理
 @Controller
@@ -91,23 +89,25 @@ public class PoetController {
         return result;
     }
 
-
-
     //管理员添加诗人
-//    @PostMapping("/admin/addpoet")
-//    @ResponseBody
-//    public Result addpoet(TNotice notice, HttpSession session) throws ParseException {
-//        Result result=new Result();
-//        TUser usersession=(TUser) (session.getAttribute("usersession"));
-//        notice.setEmail(usersession.getEmail());
-//        //获取当前时间
-//        Date date=new Date();
-//        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd kk:mm:ss ");
-//        String time=sdf.format(date);
-//        notice.setTime(sdf.parse(time));
-//
-//        noticeService.WriteNotice(notice);
-//        result.setData(notice);
-//        return  result;
-//    }
+    @PostMapping("/admin/addpoet")
+    @ResponseBody
+    public Result addpoet(TPoet poet) throws ParseException {
+        Result result=new Result();
+        poetService.AddPoet(poet);
+        result.setDescription("添加成功");//添加返回信息描述
+        result.setData(poet);
+        return  result;
+    }
+
+    //管理员编辑修改诗人信息
+    @PostMapping("/admin/savepoet")
+    @ResponseBody
+    public Result ModifyPoet(TPoet poet) throws NoSuchAlgorithmException {
+        Result result = new Result();
+        poetService.modifyPoet(poet);
+        result.setDescription("修改成功");//添加返回信息描述
+        result.setData(poet);
+        return result;
+    }
 }

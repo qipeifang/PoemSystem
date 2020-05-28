@@ -29,4 +29,9 @@ public class PoetryTypeImp implements PoetryTypeService {
     public void deleteById(long id) {
         poetryTypeDao.deleteById(id);
     }
+
+    @Override
+    public void AddPoetryType(TPoetryType poetryType) {
+        poetryTypeDao.save(poetryType);
+    }
 }

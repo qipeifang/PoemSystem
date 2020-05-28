@@ -1,7 +1,6 @@
 package com.springboot.service;
 
 import com.springboot.entity.TDynasty;
-import com.springboot.entity.TPoetryType;
 
 import java.util.List;
 
@@ -10,4 +9,6 @@ public interface DynastyService extends java.io.Serializable {
     List<TDynasty> getAllDynasty();
     void deleteById(long id);
     List<TDynasty> adminshowAll(String kw);
+
+    void AddDynasty(TDynasty dynasty);
 }

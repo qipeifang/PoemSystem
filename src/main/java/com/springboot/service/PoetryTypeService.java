@@ -11,4 +11,6 @@ public interface PoetryTypeService extends java.io.Serializable {
     List<TPoetryType> adminshowAll(String kw);
 
     public void deleteById(long id);
+
+    void AddPoetryType(TPoetryType poetryType);
 }

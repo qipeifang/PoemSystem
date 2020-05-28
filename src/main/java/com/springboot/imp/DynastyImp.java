@@ -30,4 +30,9 @@ public class DynastyImp implements DynastyService {
     public List<TDynasty> adminshowAll(String kw) {
         return dynastyDao.findByKeyword(kw);
     }
+
+    @Override
+    public void AddDynasty(TDynasty dynasty) {
+        dynastyDao.save(dynasty);
+    }
 }

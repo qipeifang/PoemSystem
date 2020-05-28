@@ -22,9 +22,13 @@ public interface UserDao extends JpaRepository<TUser, Long> {
     Optional<TUser> findByEmail(String email);
     List<TUser> findByEmailAndIdNot(String email, long id);
     //通过关键字查询用户信息
-    @Query("select u from TUser u where username like ?1 or email like ?1")
-    public Page<TUser> findByKeyword(String kw, Pageable pageable);
+//    @Query("select u from TUser u where username like ?1 or email like ?1")
+////    public Page<TUser> findByKeyword(String kw, Pageable pageable);
 
     Page<TUser> findAll(Pageable pageable);
+
+    //管理员通过关键字查询用户信息
+    @Query("select u from TUser u where username like ?1 or email like ?1")
+    public List<TUser> findByKeyword(String kw);
 }
 

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 
 @Controller
@@ -84,6 +85,18 @@ public class DynastyController {
         result.setData(listcomms);
         return result;
     }
+
+    //管理员添加朝代
+    @PostMapping("/admin/adddynasty")
+    @ResponseBody
+    public Result addpoet(TDynasty dynasty) throws ParseException {
+        Result result=new Result();
+        dynastyService.AddDynasty(dynasty);
+        result.setDescription("添加成功");//添加返回信息描述
+        result.setData(dynasty);
+        return  result;
+    }
+
 
 }
 

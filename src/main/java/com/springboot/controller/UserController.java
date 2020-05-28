@@ -96,7 +96,7 @@ public class UserController {
 			user.setPassword(sha1Test.toHexString(user.getPassword()));
 			//注册时 一律把isAdmin、isVIP、grade设为0
 			user.setIsManager(0);
-			user.setIsVIP(0);
+//			user.setIsVIP(0);
 			user.setGrade(0);
 			userService.addUser(user);
 			result2.setDescription("注册成功，请登录");

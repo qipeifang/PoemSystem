@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 
 @Controller
@@ -82,5 +83,17 @@ public class PoetryTypeController {
         //放到data中
         result.setData(listtypes);
         return result;
+    }
+
+
+    //管理员添加诗词类型
+    @PostMapping("/admin/addtype")
+    @ResponseBody
+    public Result addpoet(TPoetryType poetryType) throws ParseException {
+        Result result=new Result();
+        poetryTypeService.AddPoetryType(poetryType);
+        result.setDescription("添加成功");//添加返回信息描述
+        result.setData(poetryType);
+        return  result;
     }
 }
