@@ -17,7 +17,7 @@ public interface UserService extends java.io.Serializable{
 //    public Page<TUser> findAll(String kw, Pageable pageable);
     public TUser findById(long id);
     public void delete(TUser u);//删除一条信息
-    public boolean deleteById(long id);
+    public void deleteById(long id);
     public boolean deletes(List<TUser> users);//批量删除
 
     TUser findByEmail(String email);
@@ -42,6 +42,9 @@ public interface UserService extends java.io.Serializable{
 
 
     List<TUser> adminshowAll(String kw);
+
+
+    public void deleteByEmail(String email);
 }
 
 

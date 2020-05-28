@@ -16,4 +16,6 @@ public interface PoetService extends java.io.Serializable {
     void AddPoet(TPoet poet);
 
     public void modifyPoet(TPoet poet);
+
+    List<TPoet> findName(String name);
 }

@@ -30,5 +30,9 @@ public interface UserDao extends JpaRepository<TUser, Long> {
     //管理员通过关键字查询用户信息
     @Query("select u from TUser u where username like ?1 or email like ?1")
     public List<TUser> findByKeyword(String kw);
+
+//    @Delete("delete from t_user where email=?")
+    public void deleteByEmail(String email);
+
 }
 

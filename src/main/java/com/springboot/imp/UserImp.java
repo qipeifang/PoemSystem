@@ -101,9 +101,8 @@ public  class UserImp implements UserService {
     }
 
     @Override
-    public boolean deleteById(long id) {
+    public void deleteById(long id) {
         userDao.deleteById(id);
-        return false;
     }
 
     @Override
@@ -166,6 +165,11 @@ public  class UserImp implements UserService {
     @Override
     public List<TUser> adminshowAll(String kw) {
         return userDao.findByKeyword(kw);
+    }
+
+    @Override
+    public void deleteByEmail(String email) {
+        userDao.deleteByEmail(email);
     }
 
 

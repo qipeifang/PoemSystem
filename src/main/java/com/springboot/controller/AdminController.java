@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -53,12 +52,32 @@ public class AdminController {
         return result;
     }
 
+//    @PostMapping("/admin/deleteuser")
+//    @ResponseBody
+//    public Result admindelete(@RequestBody TUser user){
+//        Result result = new Result();
+////        Integer id1=Integer.valueOf(id);
+////        userService.deleteById(id1);
+//        userService.delete(user);
+//        result.setDescription("删除成功");//添加返回信息描述
+//        //添加返回数据
+//        String kw="%%";
+//        //通过关键字查询
+//        List<TUser> listusers= userService.adminshowAll(kw);
+//        //放到data中
+//        result.setData(listusers);
+//        return result;
+//    }
+
+
+
     @PostMapping("/admin/deleteuser")
     @ResponseBody
-    public Result admindelete(@RequestBody String id){
+    public Result admindelete(@RequestBody String email){
         Result result = new Result();
-        Integer id1=Integer.valueOf(id);
-        userService.deleteById(id1);
+//        Integer id1=Integer.valueOf(id);
+//        userService.deleteById(id1);
+        userService.deleteByEmail(email);
         result.setDescription("删除成功");//添加返回信息描述
         //添加返回数据
         String kw="%%";
@@ -68,6 +87,8 @@ public class AdminController {
         result.setData(listusers);
         return result;
     }
+
+
 
 
     //添加、修改用户 id存在编辑用户信息，不存在则添加用户
