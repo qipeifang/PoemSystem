@@ -98,6 +98,17 @@ public class DynastyController {
         return  result;
     }
 
+
+    //管理员修改朝代
+    @PostMapping("/admin/modifydynasty")
+    @ResponseBody
+    public Result modifyDynasty(TDynasty dynasty) throws ParseException {
+        Result result=new Result();
+        dynastyService.AddDynasty(dynasty);
+        result.setDescription("添加成功");//添加返回信息描述
+        result.setData(dynasty);
+        return  result;
+    }
 }
 
 

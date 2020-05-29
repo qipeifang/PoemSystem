@@ -96,4 +96,15 @@ public class PoetryTypeController {
         result.setData(poetryType);
         return  result;
     }
+
+    //管理员修改诗词类型
+    @PostMapping("/admin/modifytype")
+    @ResponseBody
+    public Result modifyType(TPoetryType poetryType) throws ParseException {
+        Result result=new Result();
+        poetryTypeService.AddPoetryType(poetryType);
+        result.setDescription("添加成功");//添加返回信息描述
+        result.setData(poetryType);
+        return  result;
+    }
 }

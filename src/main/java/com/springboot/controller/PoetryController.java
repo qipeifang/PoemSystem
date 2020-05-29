@@ -110,4 +110,15 @@ public class PoetryController {
         result.setData(poetry);
         return  result;
     }
+
+    //管理员修改诗词
+    @PostMapping("/admin/modifypoetry")
+    @ResponseBody
+    public Result modifypoetry(TPoetry poetry) throws ParseException {
+        Result result=new Result();
+        poetryService.AddPoetry(poetry);
+        result.setDescription("添加成功");//添加返回信息描述
+        result.setData(poetry);
+        return  result;
+    }
 }

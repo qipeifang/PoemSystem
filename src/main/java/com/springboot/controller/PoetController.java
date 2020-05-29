@@ -150,17 +150,17 @@ public class PoetController {
         result.setData(poet);
         return  result;
     }
-//
-//    //管理员编辑修改诗人信息
-//    @PostMapping("/admin/savepoet")
-//    @ResponseBody
-//    public Result ModifyPoet(TPoet poet) throws NoSuchAlgorithmException {
-//        Result result = new Result();
-//        poetService.modifyPoet(poet);
-//        result.setDescription("修改成功");//添加返回信息描述
-//        result.setData(poet);
-//        return result;
-//    }
+
+    //管理员编辑修改诗人信息
+    @PostMapping("/admin/modifypoet")
+    @ResponseBody
+    public Result ModifyPoet(TPoet poet) throws NoSuchAlgorithmException {
+        Result result = new Result();
+        poetService.modifyPoet(poet);
+        result.setDescription("修改成功");//添加返回信息描述
+        result.setData(poet);
+        return result;
+    }
 
 
 }
