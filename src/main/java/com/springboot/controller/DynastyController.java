@@ -2,6 +2,7 @@ package com.springboot.controller;
 
 import com.springboot.bean.Result;
 import com.springboot.entity.TDynasty;
+import com.springboot.entity.TPoetry;
 import com.springboot.entity.VPoetry;
 import com.springboot.service.DynastyService;
 import com.springboot.service.VPoetryService;
@@ -89,14 +90,13 @@ public class DynastyController {
     //管理员添加朝代
     @PostMapping("/admin/adddynasty")
     @ResponseBody
-    public Result addpoet(TDynasty dynasty) throws ParseException {
+    public Result addDynasty(TDynasty dynasty) throws ParseException {
         Result result=new Result();
         dynastyService.AddDynasty(dynasty);
         result.setDescription("添加成功");//添加返回信息描述
         result.setData(dynasty);
         return  result;
     }
-
 
 }
 

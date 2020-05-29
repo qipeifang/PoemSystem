@@ -3,10 +3,15 @@ package com.springboot.controller;
 import com.springboot.bean.Result;
 import com.springboot.entity.TPoet;
 import com.springboot.entity.TUser;
+import com.springboot.entity.VPoet;
+import com.springboot.entity.VPoetry;
 import com.springboot.security.SHA1Test;
 import com.springboot.service.PoetService;
+import com.springboot.service.VPoetService;
+import com.springboot.service.VPoetryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -21,7 +26,8 @@ import java.util.List;
 public class PoetController {
     @Autowired
     PoetService poetService;
-
+    @Autowired
+    VPoetService vPoetService;
     @GetMapping("/listpoets")
     @ResponseBody
     public Result listallpoets(String kw){
@@ -90,6 +96,50 @@ public class PoetController {
         return result;
     }
 
+    //管理员功能
+    @GetMapping("/admin/listpoet")
+    @ResponseBody
+    public Result adminlistallcomment(String kw, Model model){
+        if (kw!=null) kw="%"+kw+"%";
+        if (kw==null) kw="%%";
+        Result result = new Result();
+        //通过关键字查询
+        List<VPoet> listcomms= vPoetService.adminshowAll(kw);
+        //放到data中
+        result.setData(listcomms);
+        return result;
+    }
+    @PostMapping("/admin/listpoet")
+    @ResponseBody
+    public Result adminlistallcommentbykw(@RequestBody String kw){
+        if (kw!=null) kw="%"+kw+"%";
+        if (kw==null) kw="%%";
+        System.out.println(kw);
+        Result result = new Result();
+        //通过关键字查询
+        List<VPoet> listcomms= vPoetService.adminshowAll(kw);
+        //放到data中
+        result.setData(listcomms);
+        return result;
+    }
+
+    @PostMapping("/admin/deletepoet")
+    @ResponseBody
+    public Result admindelete(@RequestBody String id){
+        Result result = new Result();
+        Integer id1=Integer.valueOf(id);
+        poetService.deleteById(id1);
+        result.setDescription("删除成功");//添加返回信息描述
+        //添加返回数据
+        String kw="%%";
+        //通过关键字查询
+        List<VPoet> listcomms= vPoetService.adminshowAll(kw);
+        //放到data中
+        result.setData(listcomms);
+        return result;
+    }
+
+
     //管理员添加诗人
     @PostMapping("/admin/addpoet")
     @ResponseBody
@@ -112,32 +162,5 @@ public class PoetController {
 //        return result;
 //    }
 
-
-//    //添加、修改用户 id存在编辑用户信息，不存在则添加用户
-//    @PostMapping("/admin/addpoet")
-//    @ResponseBody
-//    public Result save(TPoet poet, RedirectAttributes attr) {
-//        Result result=new Result();
-//        try {
-//            //如果id为0 jpa的save方法起新增的作用;如果save不为0 那么jpa save方法起update作用
-//            if (poet.getId() == 0) {
-//                //检查诗人是否已存在
-//                if (poetService.findName(poet.getName()).size() != 0) {//如果该诗人已存在
-//                    attr.addFlashAttribute("message", "该诗人已存在");
-//                    result.setDescription("该诗人已存在");
-//                    result.setCode(400);
-//                    return result;
-//                }
-//            }
-//            poetService.AddPoet(poet);
-//            result.setDescription("保存成功");
-//            result.setData(poet);
-//            return result;
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return result;
-//    }
-//
 
 }

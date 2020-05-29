@@ -75,4 +75,14 @@ public class UploadController {
         result.setData(list);
         return result;
     }
+    //查找已审核的
+    @GetMapping("/listallcheckuploads")
+    @ResponseBody
+    public Result listallcheckuploads() {
+        List<TUpload> list=uploadService.findAllByStatus(true);
+        Result result = new Result();
+        result.setData(list);
+        return result;
+    }
+
 }

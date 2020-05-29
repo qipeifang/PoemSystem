@@ -1,5 +1,6 @@
 package com.springboot.controller;
 import com.springboot.bean.Result;
+import com.springboot.entity.TPoet;
 import com.springboot.entity.TPoetry;
 import com.springboot.entity.VPoetry;
 import com.springboot.service.PoetryService;
@@ -102,7 +103,7 @@ public class PoetryController {
     //管理员添加诗词
     @PostMapping("/admin/addpoetry")
     @ResponseBody
-    public Result addpoet(TPoetry poetry) throws ParseException {
+    public Result addpoetry(TPoetry poetry) throws ParseException {
         Result result=new Result();
         poetryService.AddPoetry(poetry);
         result.setDescription("添加成功");//添加返回信息描述

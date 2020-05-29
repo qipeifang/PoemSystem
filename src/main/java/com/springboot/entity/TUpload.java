@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "T_Upload", schema = "test")
+@Table(name = "t_upload", schema = "test")
 public class TUpload {
     //上传资源表
     @Id
@@ -17,12 +17,12 @@ public class TUpload {
     private boolean status;//上传资源状态 false:审核未通过 true：审核已通过
     //上传资源
     private String name;//古诗名
-    private int dynastyid;
+    private String dynasty;
     private String content;
     private String annotation;
     private String note;
-    private int typeid;
-    private int authoruid;
+    private String type;
+    private String author;
     private String translation;
 
     public TUpload() {
@@ -77,13 +77,6 @@ public class TUpload {
         this.name = name;
     }
 
-    public int getDynastyid() {
-        return dynastyid;
-    }
-
-    public void setDynastyid(int dynastyid) {
-        this.dynastyid = dynastyid;
-    }
 
     public String getContent() {
         return content;
@@ -109,20 +102,28 @@ public class TUpload {
         this.note = note;
     }
 
-    public int getTypeid() {
-        return typeid;
+    public String getDynasty() {
+        return dynasty;
     }
 
-    public void setTypeid(int typeid) {
-        this.typeid = typeid;
+    public void setDynasty(String dynasty) {
+        this.dynasty = dynasty;
     }
 
-    public int getAuthoruid() {
-        return authoruid;
+    public String getType() {
+        return type;
     }
 
-    public void setAuthoruid(int authoruid) {
-        this.authoruid = authoruid;
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getTranslation() {
