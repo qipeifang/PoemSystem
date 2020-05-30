@@ -114,7 +114,7 @@ public class NoticeController {
     //用户只能查看通知，没有任何操作
     @GetMapping("/listnotics")
     @ResponseBody
-    public Result userlistallcoll(){
+    public Result userlistallnotice(){
         Result result = new Result();
         //通过用户邮箱和输入的关键字展示通知
         List<TNotice> listnots= noticeService.usershowAll();

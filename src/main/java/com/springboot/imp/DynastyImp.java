@@ -35,4 +35,9 @@ public class DynastyImp implements DynastyService {
     public void AddDynasty(TDynasty dynasty) {
         dynastyDao.save(dynasty);
     }
+
+    @Override
+    public void save(TDynasty dynasty) {
+        dynastyDao.save(dynasty);
+    }
 }

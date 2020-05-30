@@ -99,7 +99,7 @@ public class PoetController {
     //管理员功能
     @GetMapping("/admin/listpoet")
     @ResponseBody
-    public Result adminlistallcomment(String kw, Model model){
+    public Result adminlistallpoet(String kw, Model model){
         if (kw!=null) kw="%"+kw+"%";
         if (kw==null) kw="%%";
         Result result = new Result();
@@ -111,7 +111,7 @@ public class PoetController {
     }
     @PostMapping("/admin/listpoet")
     @ResponseBody
-    public Result adminlistallcommentbykw(@RequestBody String kw){
+    public Result adminlistallpoetbykw(@RequestBody String kw){
         if (kw!=null) kw="%"+kw+"%";
         if (kw==null) kw="%%";
         System.out.println(kw);
@@ -156,6 +156,7 @@ public class PoetController {
     @ResponseBody
     public Result ModifyPoet(TPoet poet) throws NoSuchAlgorithmException {
         Result result = new Result();
+        System.out.println("前端传来的数据poet====="+poet.toString());//前端传来的数据
         poetService.modifyPoet(poet);
         result.setDescription("修改成功");//添加返回信息描述
         result.setData(poet);

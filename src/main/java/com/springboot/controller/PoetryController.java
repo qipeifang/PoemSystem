@@ -59,7 +59,7 @@ public class PoetryController {
     //管理员功能
     @GetMapping("/admin/listpoetry")
     @ResponseBody
-    public Result adminlistallcomment(String kw, Model model){
+    public Result adminlistallpoetry(String kw, Model model){
         if (kw!=null) kw="%"+kw+"%";
         if (kw==null) kw="%%";
         Result result = new Result();
@@ -71,7 +71,7 @@ public class PoetryController {
     }
     @PostMapping("/admin/listpoetry")
     @ResponseBody
-    public Result adminlistallcommentbykw(@RequestBody String kw){
+    public Result adminlistallpoetrybykw(@RequestBody String kw){
         if (kw!=null) kw="%"+kw+"%";
         if (kw==null) kw="%%";
         System.out.println(kw);
@@ -116,6 +116,7 @@ public class PoetryController {
     @ResponseBody
     public Result modifypoetry(TPoetry poetry) throws ParseException {
         Result result=new Result();
+        System.out.println("前端传来的数据poetry====="+poetry.toString());//前端传来的数据
         poetryService.AddPoetry(poetry);
         result.setDescription("添加成功");//添加返回信息描述
         result.setData(poetry);

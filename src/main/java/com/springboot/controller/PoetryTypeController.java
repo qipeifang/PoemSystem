@@ -45,7 +45,7 @@ public class PoetryTypeController {
     //管理员功能
     @GetMapping("/admin/listpoetrytypes")
     @ResponseBody
-    public Result adminlistalluser(String kw, Model model){
+    public Result adminlistalltype(String kw, Model model){
         if (kw!=null) kw="%"+kw+"%";
         if (kw==null) kw="%%";
         Result result = new Result();
@@ -57,7 +57,7 @@ public class PoetryTypeController {
     }
     @PostMapping("/admin/listpoetrytypes")
     @ResponseBody
-    public Result adminlistalluserbykw(@RequestBody String kw){
+    public Result adminlistalltypebykw(@RequestBody String kw){
         if (kw!=null) kw="%"+kw+"%";
         if (kw==null) kw="%%";
         System.out.println(kw);
@@ -102,6 +102,7 @@ public class PoetryTypeController {
     @ResponseBody
     public Result modifyType(TPoetryType poetryType) throws ParseException {
         Result result=new Result();
+        System.out.println("前端传来的数据poetryType====="+poetryType.toString());//前端传来的数据
         poetryTypeService.AddPoetryType(poetryType);
         result.setDescription("添加成功");//添加返回信息描述
         result.setData(poetryType);

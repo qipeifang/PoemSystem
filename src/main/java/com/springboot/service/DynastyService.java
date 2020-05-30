@@ -1,6 +1,7 @@
 package com.springboot.service;
 
 import com.springboot.entity.TDynasty;
+import com.springboot.entity.TUser;
 
 import java.util.List;
 
@@ -11,4 +12,6 @@ public interface DynastyService extends java.io.Serializable {
     List<TDynasty> adminshowAll(String kw);
 
     void AddDynasty(TDynasty dynasty);
+
+    public void save(TDynasty dynasty);
 }

@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
@@ -40,6 +41,7 @@ public class AdminController {
         List<TUser> listusers= userService.adminshowAll(kw);
         //放到data中
         result.setData(listusers);
+        System.out.println("listusers====="+listusers.toString());
         return result;
     }
     @PostMapping("/admin/listusers")
@@ -56,13 +58,31 @@ public class AdminController {
         return result;
     }
 
+    @PostMapping("/admin/deleteuser")
+    @ResponseBody
+   public Result admindelete(@RequestBody String id){
+        Result result = new Result();
+        Integer id1=Integer.valueOf(id);
+        userService.deleteById(id1);
+        result.setDescription("删除成功");//添加返回信息描述
+        //添加返回数据
+        String kw="%%";
+        //通过关键字查询
+        List<TUser> listcomms= userService.adminshowAll(kw);
+        //放到data中
+        result.setData(listcomms);
+        return result;
+    }
+
+
+//
 //    @PostMapping("/admin/deleteuser")
 //    @ResponseBody
-//    public Result admindelete(@RequestBody TUser user){
+//    public Result admindelete(@RequestBody String email){
 //        Result result = new Result();
 ////        Integer id1=Integer.valueOf(id);
 ////        userService.deleteById(id1);
-//        userService.delete(user);
+//        userService.deleteByEmail(email);
 //        result.setDescription("删除成功");//添加返回信息描述
 //        //添加返回数据
 //        String kw="%%";
@@ -70,57 +90,6 @@ public class AdminController {
 //        List<TUser> listusers= userService.adminshowAll(kw);
 //        //放到data中
 //        result.setData(listusers);
-//        return result;
-//    }
-
-
-
-    @PostMapping("/admin/deleteuser")
-    @ResponseBody
-    public Result admindelete(@RequestBody String email){
-        Result result = new Result();
-//        Integer id1=Integer.valueOf(id);
-//        userService.deleteById(id1);
-        userService.deleteByEmail(email);
-        result.setDescription("删除成功");//添加返回信息描述
-        //添加返回数据
-        String kw="%%";
-        //通过关键字查询
-        List<TUser> listusers= userService.adminshowAll(kw);
-        //放到data中
-        result.setData(listusers);
-        return result;
-    }
-
-
-
-
-//    //添加、修改用户 id存在编辑用户信息，不存在则添加用户
-//    @PostMapping("/admin/saveuser")
-//    @ResponseBody
-//    public Result save(TUser user, RedirectAttributes attr) {
-//        Result result=new Result();
-//        try {
-//            //如果id为0 jpa的save方法起新增的作用;如果save不为0 那么jpa save方法起update作用
-//            if (user.getId() == 0) {
-//                //检查邮箱是否已注册
-//                if (userService.findEmail(user.getEmail()).size() != 0) {//如果该邮箱已注册
-//                    attr.addFlashAttribute("message", "该邮箱已注册");
-//                    result.setDescription("该邮箱已注册");
-//                    result.setCode(400);
-//                    return result;
-//                }
-//                //密码加密
-//                SHA1Test sha1Test = new SHA1Test();
-//                user.setPassword(sha1Test.toHexString(user.getPassword()));
-//            }
-//            userService.saveUser(user);
-//            result.setDescription("保存成功");
-//            result.setData(user);
-//            return result;
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
 //        return result;
 //    }
 
@@ -167,6 +136,7 @@ public class AdminController {
     @ResponseBody
     public Result ModifyUser(TUser user, RedirectAttributes attr) throws NoSuchAlgorithmException {
         Result result=new Result();
+        System.out.println("前端传来的数据user====="+user.toString());//前端传来的数据
         //密码加密
         SHA1Test sha1Test = new SHA1Test();
         user.setPassword(sha1Test.toHexString(user.getPassword()));
@@ -176,6 +146,44 @@ public class AdminController {
         result.setData(newuser);
         return result;
     }
+
+
+//
+//    //个人信息管理界面中:更改信息后保存
+//    @PostMapping("/admin/modifyuser")
+//    @ResponseBody
+//    public Result SavePersonalInfo(TUser user, HttpSession session) throws NoSuchAlgorithmException {
+//        Result result = new Result();
+//        TUser user2=userService.findByEmail(user.getEmail());
+//        System.out.println("前端传来的数据user====="+user.toString());//前端修后传来重新写入的数据
+//        System.out.println("前端修改前数据user2====="+user2.toString());//前端修改前数据
+//        System.out.println("111");
+////        if(userService.findByEmailNotId(user.getEmail(),user.getId()).size()!=0){
+////            result.setDescription("该邮箱已绑定账号，修改失败！");
+////            result.setCode(400);
+////            System.out.println("222");
+////            return result;
+////        }
+////        else {
+////        if(userService.findByEmail(user.getEmail()))
+////            SHA1Test sha1Test = new SHA1Test();
+////            user.setPassword(sha1Test.toHexString(user.getPassword()));
+//        user.setUsername(user2.getUsername());
+//            System.out.println("444");
+//            userService.modifyUser(user2);
+//             System.out.println("555");
+//            result.setDescription("修改个人信息成功！");
+//            System.out.println("666");
+//            TUser usersession = userService.findById(user2.getId());
+////            session.setAttribute("usersession", usersession);
+//            result.setData(usersession);
+//            System.out.println("user2==="+user2.toString());
+//            System.out.println("usersession==="+usersession.toString());
+//            return result;
+////        }
+//    }
+//
+
 
 
 //    //管理员添加用户

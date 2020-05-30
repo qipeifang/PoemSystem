@@ -47,7 +47,7 @@ public class DynastyController {
     //管理员功能
     @GetMapping("/admin/listdynasty")
     @ResponseBody
-    public Result adminlistallcomment(String kw, Model model){
+    public Result adminlistalldynasty(String kw, Model model){
         if (kw!=null) kw="%"+kw+"%";
         if (kw==null) kw="%%";
         Result result = new Result();
@@ -59,7 +59,7 @@ public class DynastyController {
     }
     @PostMapping("/admin/listdynasty")
     @ResponseBody
-    public Result adminlistallcommentbykw(@RequestBody String kw){
+    public Result adminlistalldynastybykw(@RequestBody String kw){
         if (kw!=null) kw="%"+kw+"%";
         if (kw==null) kw="%%";
         System.out.println(kw);
@@ -92,6 +92,7 @@ public class DynastyController {
     @ResponseBody
     public Result addDynasty(TDynasty dynasty) throws ParseException {
         Result result=new Result();
+        System.out.println("dynasty====="+dynasty.toString());//前端传来的数据
         dynastyService.AddDynasty(dynasty);
         result.setDescription("添加成功");//添加返回信息描述
         result.setData(dynasty);
@@ -104,7 +105,8 @@ public class DynastyController {
     @ResponseBody
     public Result modifyDynasty(TDynasty dynasty) throws ParseException {
         Result result=new Result();
-        dynastyService.AddDynasty(dynasty);
+        System.out.println("前端传来的数据dynasty====="+dynasty.toString());//前端传来的数据
+        dynastyService.save(dynasty);
         result.setDescription("添加成功");//添加返回信息描述
         result.setData(dynasty);
         return  result;
