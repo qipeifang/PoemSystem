@@ -125,44 +125,44 @@ public class AdminController {
 //    }
 
 
-//    //添加、修改用户 id存在编辑用户信息，不存在则添加用户
-//    @PostMapping("/admin/saveuser")
-//    @ResponseBody
-//    public Result save(TUser user, RedirectAttributes attr) {
-//        Result result=new Result();
-//        try {
-//            //如果id为0 jpa的save方法起新增的作用;如果save不为0 那么jpa save方法起update作用
-//            if (user.getId() == 0) {
-//                //检查邮箱是否已注册
-//                if (userService.findEmail(user.getEmail()).size() != 0) {//如果该邮箱已注册
-//                    attr.addFlashAttribute("message", "该邮箱已注册");
-//                    result.setDescription("该邮箱已注册");
-//                    result.setCode(400);
-//                    result.setNextAction("/saveuser");
-//                    return result;
-//                }
-//                //密码加密
-//                SHA1Test sha1Test = new SHA1Test();
-//                user.setPassword(sha1Test.toHexString(user.getPassword()));
-//            }
-//            //密码加密
-//            SHA1Test sha1Test = new SHA1Test();
-//            user.setPassword(sha1Test.toHexString(user.getPassword()));
-//            userService.saveUser(user);
-//            result.setDescription("保存成功");
-//            result.setCode(200);
-//            result.setData(user);
-////            result.setNextAction("/listusers");
-//            return result;
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return result;
-//    }
+    //添加、修改用户 id存在编辑用户信息，不存在则添加用户
+    @PostMapping("/admin/saveuser")
+    @ResponseBody
+    public Result save(TUser user, RedirectAttributes attr) {
+        Result result=new Result();
+        try {
+            //如果id为0 jpa的save方法起新增的作用;如果save不为0 那么jpa save方法起update作用
+            if (user.getId() == 0) {
+                //检查邮箱是否已注册
+                if (userService.findEmail(user.getEmail()).size() != 0) {//如果该邮箱已注册
+                    attr.addFlashAttribute("message", "该邮箱已注册");
+                    result.setDescription("该邮箱已注册");
+                    result.setCode(400);
+                    result.setNextAction("/saveuser");
+                    return result;
+                }
+                //密码加密
+                SHA1Test sha1Test = new SHA1Test();
+                user.setPassword(sha1Test.toHexString(user.getPassword()));
+            }
+            //密码加密
+            SHA1Test sha1Test = new SHA1Test();
+            user.setPassword(sha1Test.toHexString(user.getPassword()));
+            userService.saveUser(user);
+            result.setDescription("保存成功");
+            result.setCode(200);
+            result.setData(user);
+//            result.setNextAction("/listusers");
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
 
 
-    //编辑修改
+    //编辑修改用户信息
     @PostMapping("/admin/modifyuser")
     @ResponseBody
     public Result ModifyUser(TUser user, RedirectAttributes attr) throws NoSuchAlgorithmException {
@@ -178,19 +178,19 @@ public class AdminController {
     }
 
 
-    //管理员添加用户
-    @PostMapping("/admin/saveuser")
-    @ResponseBody
-    public Result addUser(TUser user) throws ParseException, NoSuchAlgorithmException {
-        Result result=new Result();
-        //密码加密
-        SHA1Test sha1Test = new SHA1Test();
-        user.setPassword(sha1Test.toHexString(user.getPassword()));
-        userService.save(user);
-        result.setDescription("添加成功");//添加返回信息描述
-        result.setData(user);
-        return  result;
-    }
+//    //管理员添加用户
+//    @PostMapping("/admin/saveuser")
+//    @ResponseBody
+//    public Result addUser(TUser user) throws ParseException, NoSuchAlgorithmException {
+//        Result result=new Result();
+//        //密码加密
+//        SHA1Test sha1Test = new SHA1Test();
+//        user.setPassword(sha1Test.toHexString(user.getPassword()));
+//        userService.save(user);
+//        result.setDescription("添加成功");//添加返回信息描述
+//        result.setData(user);
+//        return  result;
+//    }
 
 
 

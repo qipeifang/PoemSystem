@@ -9,17 +9,17 @@ public class TDynasty {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false, updatable = false)
-    private int id;//自增
+    private long id;//自增
     private  String name;
     private  String  starttime ;
     private  String  endtime;
     private  String intro;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
