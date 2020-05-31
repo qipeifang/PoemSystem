@@ -51,6 +51,12 @@ public class CommentController {
         Result result = new Result();
         //通过用户邮箱和输入的关键字展示收藏
         List<TComment> listcomms= commentService.showAll(email,kw);
+
+
+        System.out.println("前端传来的数据kw====="+kw);//前端传来的数据
+        System.out.println("后端传过去的数据listcomms====="+listcomms);//后端传过去的数据
+
+
         //放到data中
         result.setData(listcomms);
         return result;
@@ -143,10 +149,20 @@ public class CommentController {
     //诗词下显示评论
     @PostMapping("/poetry/listcomments")
     @ResponseBody
-
-    public Result poetry_listcomments(String poetryname){
+    public Result poetry_listcomments(@RequestBody String poetryname){
         Result result=new Result();
+        if (poetryname!=null) poetryname="%"+poetryname+"%";
+        if (poetryname==null) poetryname="%%";
+        System.out.println(poetryname);
+        System.out.println("前端传来的数据poetryname====="+poetryname);//前端传来的数据
         List<TComment> listcomms=commentService.poetry_listcomments(poetryname);
+
+
+        //通过关键字查询
+//        List<TComment> listcomms= commentService.adminshowAll(poetryname);
+
+
+        System.out.println("后端传过去的数据listcomms====="+listcomms.toString());//后端传过去的数据
         result.setData(listcomms);
         return result;
     }
