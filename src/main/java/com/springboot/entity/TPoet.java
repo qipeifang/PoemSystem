@@ -14,7 +14,7 @@ public class TPoet {
     private String birthday;
     private String deathday;//
     private int gender;
-    private int dynastyid;
+    private long dynastyid;
     private String intro;
     private String masterwork;
 
@@ -78,11 +78,11 @@ public class TPoet {
         this.gender = gender;
     }
 
-    public int getDynastyid() {
+    public long getDynastyid() {
         return dynastyid;
     }
 
-    public void setDynastyid(int dynastyid) {
+    public void setDynastyid(long dynastyid) {
         this.dynastyid = dynastyid;
     }
 

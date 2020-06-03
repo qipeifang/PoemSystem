@@ -17,4 +17,6 @@ public interface DynastyDao extends JpaRepository<TDynasty,Long> {
     //管理员通过关键字查询朝信息
     @Query("select u from TDynasty u where name like ?1 or starttime like ?1 or endtime like ?1 or intro like ?1")
     public List<TDynasty> findByKeyword(String kw);
+
+    List<TDynasty> findByName(String name);
 }

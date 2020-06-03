@@ -14,4 +14,8 @@ public interface DynastyService extends java.io.Serializable {
     void AddDynasty(TDynasty dynasty);
 
     public void save(TDynasty dynasty);
+
+
+    //添加诗词时，判断朝代是否存在，若不存在，则添加到朝代表，并返回id
+    public Long dynasty_exist(String dynastyname);
 }

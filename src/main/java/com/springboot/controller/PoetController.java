@@ -6,6 +6,7 @@ import com.springboot.entity.TUser;
 import com.springboot.entity.VPoet;
 import com.springboot.entity.VPoetry;
 import com.springboot.security.SHA1Test;
+import com.springboot.service.DynastyService;
 import com.springboot.service.PoetService;
 import com.springboot.service.VPoetService;
 import com.springboot.service.VPoetryService;
@@ -28,6 +29,8 @@ public class PoetController {
     PoetService poetService;
     @Autowired
     VPoetService vPoetService;
+    @Autowired
+    DynastyService dynastyService;
     @GetMapping("/listpoets")
     @ResponseBody
     public Result listallpoets(String kw){
@@ -143,8 +146,20 @@ public class PoetController {
     //管理员添加诗人
     @PostMapping("/admin/addpoet")
     @ResponseBody
-    public Result addpoet(TPoet poet) throws ParseException {
+//    public Result addpoet(TPoet poet) throws ParseException {
+    public Result addpoet(VPoet vpoet) throws ParseException {
         Result result=new Result();
+        TPoet poet=new TPoet();
+        poet.setName(vpoet.getName());
+        poet.setName_zi(vpoet.getName_zi());
+        poet.setName_hao(vpoet.getName_hao());
+        poet.setGender(vpoet.getGender());
+        poet.setBirthday(vpoet.getBirthday());
+        poet.setDeathday(vpoet.getDeathday());
+        poet.setDynastyid(dynastyService.dynasty_exist(vpoet.getDynastyname()));//朝代id
+        poet.setIntro(vpoet.getIntro());//简介
+        poet.setMasterwork(vpoet.getMasterwork());//主要作品
+
         poetService.AddPoet(poet);
         result.setDescription("添加成功");//添加返回信息描述
         result.setData(poet);
@@ -154,14 +169,32 @@ public class PoetController {
     //管理员编辑修改诗人信息
     @PostMapping("/admin/modifypoet")
     @ResponseBody
-    public Result ModifyPoet(TPoet poet) throws NoSuchAlgorithmException {
-        Result result = new Result();
-        System.out.println("前端传来的数据poet====="+poet.toString());//前端传来的数据
-        poetService.modifyPoet(poet);
-        result.setDescription("修改成功");//添加返回信息描述
+    public Result ModifyPoet(VPoet vpoet) throws NoSuchAlgorithmException {
+        Result result=new Result();
+        TPoet poet=new TPoet();
+        poet.setId(vpoet.getId());
+        poet.setName(vpoet.getName());
+        poet.setName_zi(vpoet.getName_zi());
+        poet.setName_hao(vpoet.getName_hao());
+        poet.setGender(vpoet.getGender());
+        poet.setBirthday(vpoet.getBirthday());
+        poet.setDeathday(vpoet.getDeathday());
+        poet.setDynastyid(dynastyService.dynasty_exist(vpoet.getDynastyname()));//朝代id
+        poet.setIntro(vpoet.getIntro());//简介
+        poet.setMasterwork(vpoet.getMasterwork());//主要作品
+
+        poetService.AddPoet(poet);
+        result.setDescription("添加成功");//添加返回信息描述
         result.setData(poet);
-        return result;
+        return  result;
     }
 
+    //    public Result ModifyPoet(TPoet poet) throws NoSuchAlgorithmException {
+//        Result result = new Result();
+//        System.out.println("前端传来的数据poet====="+poet.toString());//前端传来的数据
+//        poetService.modifyPoet(poet);
+//        result.setDescription("修改成功");//添加返回信息描述
+//        result.setData(poet);
+//        return result;
 
 }

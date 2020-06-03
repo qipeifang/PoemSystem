@@ -3,8 +3,7 @@ import com.springboot.bean.Result;
 import com.springboot.entity.TPoet;
 import com.springboot.entity.TPoetry;
 import com.springboot.entity.VPoetry;
-import com.springboot.service.PoetryService;
-import com.springboot.service.VPoetryService;
+import com.springboot.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +21,13 @@ public class PoetryController {
     PoetryService poetryService;
     @Autowired
     VPoetryService vPoetryService;
+
+    @Autowired
+    PoetService poetService;
+    @Autowired
+    DynastyService dynastyService;
+    @Autowired
+    PoetryTypeService poetryTypeService;
     //展示所有诗词
     @GetMapping("/listallpoetrys")
     @ResponseBody
@@ -103,8 +109,35 @@ public class PoetryController {
     //管理员添加诗词
     @PostMapping("/admin/addpoetry")
     @ResponseBody
-    public Result addpoetry(TPoetry poetry) throws ParseException {
+//    public Result addpoetry(TPoetry poetry) throws ParseException {
+    public Result addpoetry(VPoetry vpoetry) throws ParseException {
         Result result=new Result();
+        System.out.println("前端传来的数据Poetname====="+vpoetry.getPoetname());//前端传来的数据
+        System.out.println("前端传来的数据Dynastyname====="+vpoetry.getDynastyname());//前端传来的数据
+        System.out.println("前端传来的数据Type====="+vpoetry.getType());//前端传来的数据
+
+
+        //判断诗人名，朝代名，类型是否存在，若不存在则添加到对应表
+//        poetService.poet_exist(vpoetry.getPoetname());
+//        dynastyService.dynasty_exist(vpoetry.getDynastyname());
+//        poetryTypeService.type_exist(vpoetry.getType());
+
+        TPoetry poetry=new TPoetry();
+        poetry.setName(vpoetry.getName());
+        poetry.setDynastyid(dynastyService.dynasty_exist(vpoetry.getDynastyname()));//朝代id
+
+        TPoet poet=new TPoet();
+        poet.setName(vpoetry.getPoetname());
+        poet.setDynastyid(dynastyService.dynasty_exist(vpoetry.getDynastyname()));
+        poet.setId(poetService.poet_exist(vpoetry.getPoetname()));
+        poetService.AddPoet(poet);
+
+        poetry.setAuthoruid(poetService.poet_exist(vpoetry.getPoetname()));//诗人id
+        poetry.setTypeid(poetryTypeService.type_exist(vpoetry.getType()));//类型id
+        poetry.setContent(vpoetry.getContent());//诗词内容
+        poetry.setAnnotation(vpoetry.getAnnotation());//注释
+        poetry.setTranslation(vpoetry.getTranslation());//翻译
+
         poetryService.AddPoetry(poetry);
         result.setDescription("添加成功");//添加返回信息描述
         result.setData(poetry);
@@ -114,12 +147,45 @@ public class PoetryController {
     //管理员修改诗词
     @PostMapping("/admin/modifypoetry")
     @ResponseBody
-    public Result modifypoetry(TPoetry poetry) throws ParseException {
+    public Result modifypoetry(VPoetry vpoetry) throws ParseException {
         Result result=new Result();
-        System.out.println("前端传来的数据poetry====="+poetry.toString());//前端传来的数据
+        System.out.println("前端传来的数据Poetname====="+vpoetry.getPoetname());//前端传来的数据
+        System.out.println("前端传来的数据Dynastyname====="+vpoetry.getDynastyname());//前端传来的数据
+        System.out.println("前端传来的数据Type====="+vpoetry.getType());//前端传来的数据
+
+        //判断诗人名，朝代名，类型是否存在，若不存在则添加到对应表
+//        poetService.poet_exist(vpoetry.getPoetname());
+//        dynastyService.dynasty_exist(vpoetry.getDynastyname());
+//        poetryTypeService.type_exist(vpoetry.getType());
+
+        TPoetry poetry=new TPoetry();
+        poetry.setId(vpoetry.getId());
+        poetry.setName(vpoetry.getName());
+        poetry.setDynastyid(dynastyService.dynasty_exist(vpoetry.getDynastyname()));//朝代id
+        TPoet poet=new TPoet();
+        poet.setName(vpoetry.getPoetname());
+        poet.setDynastyid(dynastyService.dynasty_exist(vpoetry.getDynastyname()));
+        poet.setId(poetService.poet_exist(vpoetry.getPoetname()));
+        poetService.AddPoet(poet);
+        poetry.setAuthoruid(poetService.poet_exist(vpoetry.getPoetname()));//诗人id
+        poetry.setTypeid(poetryTypeService.type_exist(vpoetry.getType()));//类型id
+        poetry.setContent(vpoetry.getContent());//诗词内容
+        poetry.setAnnotation(vpoetry.getAnnotation());//注释
+        poetry.setTranslation(vpoetry.getTranslation());//翻译
+
         poetryService.AddPoetry(poetry);
-        result.setDescription("添加成功");//添加返回信息描述
+        result.setDescription("修改成功");//添加返回信息描述
         result.setData(poetry);
         return  result;
     }
+
+
+    //    public Result modifypoetry(TPoetry poetry) throws ParseException {
+//        Result result=new Result();
+//        System.out.println("前端传来的数据poetry====="+poetry.toString());//前端传来的数据
+//        poetryService.AddPoetry(poetry);
+//        result.setDescription("添加成功");//添加返回信息描述
+//        result.setData(poetry);
+//        return  result;
+//    }
 }

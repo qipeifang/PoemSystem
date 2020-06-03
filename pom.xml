@@ -77,6 +77,15 @@
 			<version>1.2.58</version>
 		</dependency>
 
+		<!--mail-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+
+
+
+
 
 		<!-- lombok简化java代码 如果没有安装，先安装这个插件-->
 		<dependency>

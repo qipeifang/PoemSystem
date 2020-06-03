@@ -13,4 +13,8 @@ public interface PoetryTypeService extends java.io.Serializable {
     public void deleteById(long id);
 
     void AddPoetryType(TPoetryType poetryType);
+
+
+    //添加诗词时，判断类型是否存在，若不存在，则添加到类型表,并返回id
+    public Long type_exist(String type);
 }

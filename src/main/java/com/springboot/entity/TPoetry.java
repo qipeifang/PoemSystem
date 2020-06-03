@@ -10,11 +10,11 @@ public class TPoetry {
     @Column(nullable = false, updatable = false)
     private long id;//自增
     private String name;//古诗名
-    private int dynastyid;
+    private long dynastyid;
     private String content;//诗词内容
     private String annotation;//注释
-    private int typeid;
-    private int authoruid;
+    private long typeid;
+    private long authoruid;
     private String translation;//翻译
 
     public TPoetry() {
@@ -36,11 +36,11 @@ public class TPoetry {
         this.name = name;
     }
 
-    public int getDynastyid() {
+    public long getDynastyid() {
         return dynastyid;
     }
 
-    public void setDynastyid(int dynastyid) {
+    public void setDynastyid(long dynastyid) {
         this.dynastyid = dynastyid;
     }
 
@@ -60,19 +60,19 @@ public class TPoetry {
         this.annotation = annotation;
     }
 
-    public int getTypeid() {
+    public long getTypeid() {
         return typeid;
     }
 
-    public void setTypeid(int typeid) {
+    public void setTypeid(long typeid) {
         this.typeid = typeid;
     }
 
-    public int getAuthoruid() {
+    public long getAuthoruid() {
         return authoruid;
     }
 
-    public void setAuthoruid(int authoruid) {
+    public void setAuthoruid(long authoruid) {
         this.authoruid = authoruid;
     }
 

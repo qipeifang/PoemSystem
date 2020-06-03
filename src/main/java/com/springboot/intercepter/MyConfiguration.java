@@ -31,6 +31,9 @@ public class MyConfiguration implements WebMvcConfigurer {
         loginRegistry.excludePathPatterns("/listalldynastybyid");
         loginRegistry.excludePathPatterns("/listpoetrybykw");
         loginRegistry.excludePathPatterns("/poetry/listcomments");
+        loginRegistry.excludePathPatterns("/test");
+        loginRegistry.excludePathPatterns("/uploadimg");
+        loginRegistry.excludePathPatterns("/listallcheckuploads");
         // 排除资源请求
         loginRegistry.excludePathPatterns("/css/login/*.css");
         loginRegistry.excludePathPatterns("/js/login/**/*.js");

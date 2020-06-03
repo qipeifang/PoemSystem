@@ -1,6 +1,7 @@
 package com.springboot.imp;
 
 import com.springboot.dao.PoetDao;
+import com.springboot.entity.TDynasty;
 import com.springboot.entity.TPoet;
 import com.springboot.entity.TUser;
 import com.springboot.service.PoetService;
@@ -48,7 +49,7 @@ public class PoetImp implements PoetService {
 
     @Override
     public List<TPoet> findName(String name) {
-        List<TPoet> poetList=UserImp.toList(poetDao.findByName(name));
+        List<TPoet> poetList=PoetImp.toList(poetDao.findByName(name));
         return poetList;
     }
 
@@ -56,5 +57,24 @@ public class PoetImp implements PoetService {
     public static <T> List <T> toList(Optional<T> optional){
         return optional.map(Collections::singletonList).orElse(Collections.emptyList());
     }
+
+
+    //添加诗词时，判断诗人是否存在，若不存在，则添加到诗人表,并返回id
+    @Override
+    public Long poet_exist(String poetname) {
+        List<TPoet> poetList=PoetImp.toList(poetDao.findByName(poetname));
+        if (poetList.size()==0){//若不存在，则添加到诗人表
+            TPoet poet=new TPoet();
+            poet.setName(poetname);
+            poetDao.save(poet);//添加到诗人表
+
+
+            List<TPoet> pList=PoetImp.toList(poetDao.findByName(poetname));
+            return pList.get(0).getId();
+        }
+        List<TPoet> pList=PoetImp.toList(poetDao.findByName(poetname));
+        return pList.get(0).getId();
+    }
+
 }
 
