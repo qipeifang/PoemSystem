@@ -10,11 +10,11 @@ public interface VPoetryService {
 
     List<VPoetry> showAllbyKw(String kw);
 
-    List<VPoetry> displayPoetry(Integer id1);
+    List<VPoetry> displayPoetry(long id1);
 
-    List<VPoetry> showAllByTypeId(Integer id1);
+    List<VPoetry> showAllByTypeId(long id1);
 
-    List<VPoetry> showAllByDynastyId(Integer id1);
+    List<VPoetry> showAllByDynastyId(long id1);
 
     void deleteById(long id);
 

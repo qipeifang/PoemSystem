@@ -39,4 +39,22 @@ public class UploadImp implements UploadService {
     public List<TUpload> findAllByStatus(Boolean status) {
         return uploadDao.findAllByStatus(status);
     }
+
+    @Override
+    public void deleteById(long id) {uploadDao.deleteById(id);}
+
+    @Override
+    public List<TUpload> showAllByStatus(String kw,Boolean status) {
+        return uploadDao.showAllByStatus(kw,status);
+    }
+
+    @Override
+    public void update(TUpload upload) {
+        uploadDao.save(upload);
+    }
+
+    @Override
+    public void check(String email, boolean b, long id) {
+        uploadDao.updateByIdAndEmail(email,b,id);
+    }
 }

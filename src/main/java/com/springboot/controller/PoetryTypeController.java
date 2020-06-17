@@ -34,7 +34,7 @@ public class PoetryTypeController {
     @ResponseBody
     public Result listallpoetrytypebyid(@RequestBody String id){
         Result result = new Result();
-        Integer id1=Integer.valueOf(id);
+        long id1=Integer.valueOf(id);
         List<VPoetry> list= vPoetryService.showAllByTypeId(id1);
         //放到data中
         result.setData(list);
@@ -73,7 +73,7 @@ public class PoetryTypeController {
     @ResponseBody
     public Result admindelete(@RequestBody String id){
         Result result = new Result();
-        Integer id1=Integer.valueOf(id);
+        long id1=Integer.valueOf(id);
         poetryTypeService.deleteById(id1);
         result.setDescription("删除成功");//添加返回信息描述
         //添加返回数据

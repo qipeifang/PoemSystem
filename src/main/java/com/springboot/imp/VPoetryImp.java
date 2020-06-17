@@ -20,17 +20,17 @@ public class VPoetryImp implements VPoetryService {
     }
 
     @Override
-    public List<VPoetry> displayPoetry(Integer id1) {
+    public List<VPoetry> displayPoetry(long id1) {
         return vPoetryDao.findById(id1);
     }
 
     @Override
-    public List<VPoetry> showAllByTypeId(Integer id1) {
+    public List<VPoetry> showAllByTypeId(long id1) {
         return vPoetryDao.findByTypeid(id1);
     }
 
     @Override
-    public List<VPoetry> showAllByDynastyId(Integer id1) {
+    public List<VPoetry> showAllByDynastyId(long id1) {
         return vPoetryDao.findByDynastyid(id1);
     }
 

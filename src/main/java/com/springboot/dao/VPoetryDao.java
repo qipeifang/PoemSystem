@@ -18,9 +18,9 @@ public interface VPoetryDao extends JpaRepository<VPoetry, Long> {
     List<VPoetry> findById(long id);
     List<VPoetry> findByIdIn(List<Long> id);
 
-    List<VPoetry> findByTypeid(Integer id1);
+    List<VPoetry> findByTypeid(long id1);
 
-    List<VPoetry> findByDynastyid(Integer id1);
+    List<VPoetry> findByDynastyid(long id1);
 
     //管理员通过关键字查询诗词信息
     @Query("select u from VPoetry u where name like ?1 or poetname like ?1 or type like ?1 or dynastyname like ?1")

@@ -3,16 +3,20 @@ package com.springboot.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.springboot.bean.Result;
+import com.springboot.entity.PRecommend;
 import com.springboot.entity.TCollection;
 import com.springboot.entity.TUser;
 import com.springboot.entity.VCollAndPoem;
 import com.springboot.service.CollectionService;
+import com.springboot.service.RecommendService;
 import com.springboot.service.VCollAndPoemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpSession;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,7 +32,8 @@ public class CollectionController {
     CollectionService collectionService;
     @Autowired
     VCollAndPoemService vCollAndPoemService;
-
+    @Autowired
+    RecommendService recommendService;
     @GetMapping("/listcollections")
     @ResponseBody
     public Result listallcoll(String kw,  Model model,HttpSession session){
@@ -91,8 +96,9 @@ public class CollectionController {
     }
     @PostMapping("/addcoll")
     @ResponseBody
-    public Result addcoll(@RequestBody String id,HttpSession session){
+    public Result addcoll(@RequestBody String id,HttpSession session) throws SQLException{
         TUser usersession=(TUser) (session.getAttribute("usersession"));
+        Result result = new Result();
         Integer id1=Integer.valueOf(id);
         String email=usersession.getEmail();
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
@@ -101,9 +107,16 @@ public class CollectionController {
         coll.setEmail(email);
         coll.setPoetryid(id1);
         coll.setTime(date);
-        collectionService.addCollection(coll);
-        Result result = new Result();
         result.setDescription("收藏成功");//添加返回信息描述
+        try {
+            collectionService.addColletion(coll);
+        }catch (Exception e){
+            e.getStackTrace();
+            result.setDescription("请勿重复收藏同一个诗文");
+        }
+        List<PRecommend> list= recommendService.getAll(0);
+        //放到data中
+        result.setData(list);
         return result;
     }
 }

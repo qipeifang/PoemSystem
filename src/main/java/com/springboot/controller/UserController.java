@@ -70,6 +70,28 @@ public class UserController {
 		result.setData(usersession);
 		return result;
 	}
+	@GetMapping("/checkloginstate")
+	@ResponseBody
+	public Result checkloginstate(HttpSession session) {
+		Result result = new Result();
+		TUser usersession=(TUser) (session.getAttribute("usersession"));
+		if(usersession==null)
+			result.setData(0);
+		else
+			result.setData(1);
+		return result;
+	}
+	@GetMapping("/quit")
+	@ResponseBody
+	public Result quit(HttpSession session) {
+		Result result = new Result();
+		session.removeAttribute("usersession");//清空session信息
+//		session.invalidate();//清除 session 中的所有信息
+		TUser usersession=(TUser) (session.getAttribute("usersession"));
+		result.setData(usersession);
+		return result;
+	}
+
 	//注册
 	@PostMapping("/register")
 	@ResponseBody

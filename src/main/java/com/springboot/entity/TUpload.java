@@ -10,7 +10,7 @@ public class TUpload {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false, updatable = false)
-    private int id;//自增
+    private long id;//自增
     private String useremail;//上传用户邮箱
     private String adminemail;//审核该上传资源的管理员email
     private Date uploadtime;//上传时间
@@ -28,11 +28,11 @@ public class TUpload {
     public TUpload() {
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

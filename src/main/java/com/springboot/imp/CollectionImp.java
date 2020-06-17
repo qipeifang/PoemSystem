@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.sql.SQLException;
 import java.util.List;
 
 @Service
@@ -18,11 +19,6 @@ import java.util.List;
 public class CollectionImp implements CollectionService {
     @Autowired
     private CollectionDao collectionDao;
-
-    @Override
-    public void addCollection(TCollection colleciton) {
-        collectionDao.save(colleciton);
-    }
 
     @Override
     public void deleteById(long id) {
@@ -38,5 +34,11 @@ public class CollectionImp implements CollectionService {
     public void deletes(List<TCollection> colls) {
         for(TCollection c:colls)
             collectionDao.delete(c);
+    }
+
+    @Override
+    public String addColletion(TCollection coll)throws SQLException {
+            collectionDao.save(coll);
+        return null;
     }
 }
